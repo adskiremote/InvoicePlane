@@ -12,6 +12,7 @@
     "setasign/fpdi-fpdf": "^1.6.1",
     "codeigniter/framework": "^3.1",
     "omnipay/omnipay": "~2.0",
-    "paragonie/random_compat": "^2.0"
+    "paragonie/random_compat": "^2.0",
+    "chriskacerguis/codeigniter-restserver": "^3.0"
   }
 }
