@@ -17,10 +17,37 @@ class Products extends REST_Controller
         $this->load->model('products/mdl_products');
     }
 
-    // Get one
+    // Get Product Options
+    public function options_get()
+    {
+        // Load additional models
+        $this->load->model('families/mdl_families');
+        $this->load->model('tax_rates/mdl_tax_rates');
+        $this->load->model('units/mdl_units');
+
+        $families = $this->mdl_families->get()->result();
+        $taxRates = $this->mdl_tax_rates->get()->result();
+        $units = $this->mdl_units->get()->result();
+
+        if(!$families || !$taxRates || !$units) {
+            $this->set_response([
+                'success' => false,
+                'message' => 'Setup your Product Families, Tax Rates and Units in InvoicePlane first'
+            ]);
+        } else {
+
+        $this->set_response([
+            'success' => true,
+            'families' => $families,
+            'tax_rates' => $taxRates,
+            'units' => $units
+        ]);
+        }
+    }
+
+    // Get Products
     public function products_get()
     {
-
         $id = $this->get('id');
         if ($id === null) {
             // Get all products
