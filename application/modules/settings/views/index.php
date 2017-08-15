@@ -38,6 +38,9 @@
         <a data-toggle="tab" href="#settings-projects-tasks"><?php _trans('projects'); ?></a>
     </li>
     <li>
+        <a data-toggle="tab" href="#settings-api-key"><?php _trans('api_key'); ?></a>
+    </li>
+    <li>
         <a data-toggle="tab" href="#settings-updates"><?php _trans('updates'); ?></a>
     </li>
 </ul>
@@ -80,6 +83,10 @@
 
             <div id="settings-projects-tasks" class="tab-pane">
                 <?php $this->layout->load_view('settings/partial_settings_projects_tasks'); ?>
+            </div>
+
+             <div id="settings-api-key" class="tab-pane">
+                <?php $this->layout->load_view('settings/partial_settings_api_key'); ?>
             </div>
 
             <div id="settings-updates" class="tab-pane">

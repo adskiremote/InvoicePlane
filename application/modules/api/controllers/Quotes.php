@@ -52,6 +52,25 @@ class Quotes extends REST_Controller
         }
     }
 
+    // Insert Quotes
+    public function quotes_put($id = null) {
+        // Build inputs
+        $data = [
+            'product_sku' => $this->input->input_stream('product_sku', TRUE),
+            'product_name' => $this->input->input_stream('product_name', TRUE),
+            'family_id' => $this->input->input_stream('family_id', TRUE),
+            'product_description' => $this->input->input_stream('product_description', TRUE),
+            'purchase_price' => $this->input->input_stream('purchase_price', TRUE),
+            'product_price' => $this->input->input_stream('product_price', TRUE),
+            'tax_rate_id' => $this->input->input_stream('tax_rate_id', TRUE),
+            'unit_id' => $this->input->input_stream('unit_id', TRUE)
+        ];
+        $result = $this->rest_quotes->insert($data);
+        $response = array('status' => true, 'message' => $data['product_name'] . ' inserted successfully');
+        $this->set_response($response);
+        
+    }
+
     // Update
 
 

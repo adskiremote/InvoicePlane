@@ -668,5 +668,8 @@ $lang = array(
 
     // Types
     'true'                                         => 'True',
-    'false'                                        => 'False'
+    'false'                                        => 'False',
+
+    // API Key
+    'api_key'                                      => 'API Key'
 );
