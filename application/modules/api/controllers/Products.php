@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use Restserver\Libraries\REST_Controller;
+require APPPATH . '/libraries/REST_Controller.php';
 
 class Products extends REST_Controller
 {
@@ -28,6 +28,12 @@ class Products extends REST_Controller
         $families = $this->mdl_families->get()->result();
         $taxRates = $this->mdl_tax_rates->get()->result();
         $units = $this->mdl_units->get()->result();
+
+        // NOT WORKING
+     //   $this->set_response->addHeader('Access-Control-Allow-Origin: *');
+      //  $this->set_response->addHeader('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
+      //  $this->set_response->addHeader('Access-Control-Max-Age: 1000');
+      //  $this->set_response->addHeader('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
 
         if(!$families || !$taxRates || !$units) {
             $this->set_response([

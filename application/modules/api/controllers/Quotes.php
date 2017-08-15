@@ -2,7 +2,7 @@
 
 defined('BASEPATH') or exit('No direct script access allowed');
 
-use Restserver\Libraries\REST_Controller;
+require APPPATH . '/libraries/REST_Controller.php';
 
 class Quotes extends REST_Controller
 {
