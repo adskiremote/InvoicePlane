@@ -30,12 +30,6 @@ class Products extends REST_Controller
         $taxRates = $this->mdl_tax_rates->get()->result();
         $units = $this->mdl_units->get()->result();
 
-        // NOT WORKING
-     //   $this->set_response->addHeader('Access-Control-Allow-Origin: *');
-      //  $this->set_response->addHeader('Access-Control-Allow-Methods: GET, PUT, POST, DELETE, OPTIONS');
-      //  $this->set_response->addHeader('Access-Control-Max-Age: 1000');
-      //  $this->set_response->addHeader('Access-Control-Allow-Headers: Content-Type, Authorization, X-Requested-With');
-
         if(!$families || !$taxRates || !$units) {
             $this->set_response([
                 'success' => false,
@@ -61,9 +55,13 @@ class Products extends REST_Controller
             $products = $this->mdl_products->get()->result();
 
             if ($products) {
-                $this->response($products, REST_Controller::HTTP_OK);
+                $this->set_response([
+                    'status' => true,
+                    'products' => $products, REST_Controller::HTTP_OK
+                ]);
+            
             } else {
-                 $this->response([
+                 $this->set_response([
                     'status' => false,
                     'message' => 'No products found'
                     ], REST_Controller::HTTP_NOT_FOUND);
@@ -72,7 +70,7 @@ class Products extends REST_Controller
             $id = (int) $id;
             if ($id <= 0) {
                 // Invalid id, set the response and exit.
-                $this->response(null, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
+                $this->set_response(null, REST_Controller::HTTP_BAD_REQUEST); // BAD_REQUEST (400) being the HTTP response code
             }
 
             $product = $this->mdl_products->get_by_id($id);
@@ -101,8 +99,12 @@ class Products extends REST_Controller
             'tax_rate_id' => $this->input->input_stream('tax_rate_id', TRUE),
             'unit_id' => $this->input->input_stream('unit_id', TRUE)
         ];
+
+        // Check if product already exists
+        
+
         $result = $this->rest_products->insert($data);
-        $response = array('status' => true, 'message' => $data['product_name'] . ' inserted successfully');
+        $response = array('status' => true, 'message' => 'Success:' . $data['product_name'] . ' inserted successfully');
         $this->set_response($response);
         
     }

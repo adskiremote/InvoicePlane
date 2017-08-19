@@ -24,4 +24,8 @@ class Rest_Products extends Response_Model
     {        
       return  $this->db->insert('ip_products', $data);
     }
+
+    public function update($data) {
+        return $this->db->update('ip_products', $data);
+    }
 }
