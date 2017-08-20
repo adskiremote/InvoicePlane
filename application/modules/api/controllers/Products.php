@@ -101,11 +101,16 @@ class Products extends REST_Controller
         ];
 
         // Check if product already exists
+        $result = $this->rest_products->get_product($data);
         
-
-        $result = $this->rest_products->insert($data);
-        $response = array('status' => true, 'message' => 'Success:' . $data['product_name'] . ' inserted successfully');
+        if(count($result) >= 1) {
+            $this->rest_products->update($result, $data);
+            $response = array('status' => true, 'message' => 'EXISTS:' . $data['product_name'] . ' updated.');
+        } else {
+            $this->rest_products->insert($data);
+            $response = array('status' => true, 'message' => 'ADDED:' . $data['product_name'] . ' added.');
+        }
         $this->set_response($response);
-        
+
     }
 }
